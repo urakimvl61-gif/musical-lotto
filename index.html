@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Музыкальное лото</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <header class="header">
+        <div class="header__info">
+          <h1 class="header__title">Музыкальное лото</h1>
+          <p class="header__subtitle">Сыграно: <span id="played-count">0</span> / 90</p>
+        </div>
+        <div class="header__actions">
+          <button type="button" id="new-game-btn" class="btn btn--secondary">Новая игра</button>
+          <button type="button" id="settings-btn" class="btn btn--primary">Настройки песен</button>
+        </div>
+      </header>
+
+      <main class="main">
+        <div id="board" class="board" aria-label="Игровое поле из 90 окошек"></div>
+      </main>
+
+      <div id="player-shell" class="player-shell">
+        <section id="youtube-panel" class="youtube-panel" hidden aria-label="YouTube-плеер">
+          <button type="button" id="youtube-close" class="youtube-panel__close btn btn--icon" aria-label="Закрыть плеер">✕</button>
+          <div id="youtube-mount" class="youtube-panel__player"></div>
+        </section>
+
+        <footer class="player-bar">
+          <div class="player-bar__info">
+            <p id="player-title" class="player-bar__title">Выберите окошко</p>
+            <div class="player-bar__controls">
+              <button type="button" id="play-pause-btn" class="btn btn--icon" aria-label="Воспроизведение">▶</button>
+              <button type="button" id="stop-btn" class="btn btn--icon" aria-label="Стоп">⏹</button>
+              <button type="button" id="close-player-btn" class="btn btn--icon" aria-label="Закрыть плеер">✕</button>
+            </div>
+          </div>
+          <div class="player-bar__progress">
+            <span id="time-current" class="player-bar__time">0:00</span>
+            <div id="progress-bar" class="progress" role="slider" aria-label="Прогресс воспроизведения" tabindex="0">
+              <div id="progress-fill" class="progress__fill"></div>
+            </div>
+            <span id="time-total" class="player-bar__time">0:00</span>
+          </div>
+          <div class="player-bar__volume">
+            <label for="volume-slider">🔊</label>
+            <input type="range" id="volume-slider" min="0" max="100" value="80" aria-label="Громкость" />
+          </div>
+        </footer>
+      </div>
+
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+      <div id="settings-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="settings-title">
+        <div class="modal__content">
+          <div class="modal__header">
+            <h2 id="settings-title">Настройки песен</h2>
+            <button type="button" id="settings-close" class="btn btn--icon" aria-label="Закрыть">✕</button>
+          </div>
+          <p class="modal__hint">
+            Укажите название и ссылку на песню: YouTube (youtube.com, youtu.be) или прямой аудиофайл (MP3, OGG, WAV).
+          </p>
+          <div class="modal__table-wrap">
+            <table class="settings-table">
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Название</th>
+                  <th>URL</th>
+                </tr>
+              </thead>
+              <tbody id="settings-table"></tbody>
+            </table>
+          </div>
+          <div class="modal__actions">
+            <button type="button" id="settings-save" class="btn btn--primary">Сохранить</button>
+            <button type="button" id="settings-reset" class="btn btn--secondary">Сбросить к умолчанию</button>
+            <button type="button" id="settings-import" class="btn btn--secondary">Импорт JSON</button>
+            <button type="button" id="settings-export" class="btn btn--secondary">Экспорт JSON</button>
+            <input type="file" id="import-input" accept="application/json,.json" hidden />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
